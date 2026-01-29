@@ -4,7 +4,6 @@ import React, { useState, useMemo } from 'react';
 
 // --- TYPES & CONFIGURATION ---
 
-// 1. Types de base
 type Booking = {
   id: string;
   roomName: string;
@@ -25,10 +24,9 @@ type Room = {
   tags: string[];
 };
 
-// 2. Types Recettes & Ingrédients (Basés sur tes CSV)
 type Ingredient = {
   name: string;
-  quantity: number; // Quantité pour le nombre de basePortions
+  quantity: number;
   unit: string;
   supplier: 'Boucher' | 'Fruits & Légumes' | 'Crèmerie/Fromager' | 'Épicerie' | 'Boissons' | 'Poissonnerie' | 'Boulanger' | 'Charcutier';
 };
@@ -38,15 +36,14 @@ type Recipe = {
   name: string;
   type: 'Entrée' | 'Plat' | 'Dessert' | 'Goûter' | 'Petit-déjeuner';
   basePortions: number; 
-  isNormand: boolean; // Tag 🍎
-  isVeggie: boolean;  // Tag 🥬
+  isNormand: boolean;
+  isVeggie: boolean;
   ingredients: Ingredient[];
 };
 
-// --- DATA MOCK (Extraits fidèles de tes fichiers CSV) ---
+// --- DATA MOCK ---
 
 const RECIPES_DB: Recipe[] = [
-  // --- PLATS ---
   {
     id: '56', 
     name: 'Poulet Vallée d\'Auge', 
@@ -98,8 +95,8 @@ const RECIPES_DB: Recipe[] = [
     id: '58',
     name: 'Coquilles Saint-Jacques normande',
     type: 'Plat',
-    basePortions: 6, 
-    isNormand: true, 
+    basePortions: 6,
+    isNormand: true,
     isVeggie: false,
     ingredients: [
       { name: 'Coquilles Saint-Jacques', quantity: 18, unit: 'pièces', supplier: 'Poissonnerie' },
@@ -108,8 +105,6 @@ const RECIPES_DB: Recipe[] = [
       { name: 'Échalotes', quantity: 2, unit: 'pièces', supplier: 'Fruits & Légumes' }
     ]
   },
-
-  // --- DESSERTS / GOÛTERS ---
   {
     id: '6', 
     name: 'Teurgoule (Riz au lait normand)', 
@@ -153,8 +148,6 @@ const RECIPES_DB: Recipe[] = [
       { name: 'Beurre', quantity: 50, unit: 'g', supplier: 'Crèmerie/Fromager' }
     ]
   },
-  
-  // --- PETIT DÉJEUNER (Standard) ---
   {
     id: 'pdj', 
     name: 'Petit-déjeuner Continental', 
@@ -229,7 +222,7 @@ export default function DomaineDemo() {
 
   return (
     <div className="min-h-screen bg-stone-100 font-sans text-stone-800 relative overflow-hidden">
-      {/* SWITCHER (Pour la démo) */}
+      {/* SWITCHER */}
       <div className="fixed bottom-4 right-4 z-50 flex gap-2 bg-stone-900 p-2 rounded-full shadow-2xl border border-stone-700">
         <button 
           onClick={() => setViewMode('guest')}
